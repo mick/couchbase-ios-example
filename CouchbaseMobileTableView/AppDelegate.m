@@ -8,31 +8,102 @@
 
 #import "AppDelegate.h"
 
-#import "RootViewController.h"
+#import "ViewController.h"
 
 @implementation AppDelegate
 
-@synthesize window = _window;
+@synthesize window;
+@synthesize navController;
+@synthesize database;
 
 - (void)dealloc
 {
-    [_window release];
+    [window release];
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    //self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    RootViewController *controller;
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
-        controller = [[[RootViewController alloc] initWithNibName:@"RootViewController_iPhone" bundle:nil] autorelease];
-    } else {
-        controller = [[[RootViewController alloc] initWithNibName:@"RootViewController_iPad" bundle:nil] autorelease];
-    }
-    self.window.rootViewController = controller;
-    [self.window makeKeyAndVisible];
+    //ViewController *controller = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
+    
+    [window addSubview:navController.view];
+    
+    //self.window.rootViewController = controller;
+    [window makeKeyAndVisible];
+    
+    CouchbaseMobile* cb = [[CouchbaseMobile alloc] init];
+    cb.delegate = self;
+    NSAssert([cb start], @"Couchbase didn't start! Error = %@", cb.error);
+    
+    
     return YES;
+}
+
+
+-(void)connectToServer:(NSURL*)serverURL {
+    NSLog(@"couchbaseMobile:didStart: <%@>", serverURL);
+    gCouchLogLevel = 2;
+    
+    ViewController* root = (ViewController*)navController.topViewController;
+    
+    if (!database) {
+        // This is the first time the server has started:
+        CouchServer *server = [[CouchServer alloc] initWithURL: serverURL];
+        self.database = [server databaseNamed: @"couchbase-demo"];
+        [server release];
+        
+    }
+    RESTOperation* op = [database create];
+    if (![op wait] && op.httpStatus != 412) {
+        // failed to contact the server or create the database
+        // (a 412 status is OK; it just indicates the db already exists.)
+        NSAssert(NO, @"CouchCocoa failed to connect.");
+    }
+    
+    
+    CouchDocument *doc = [database documentWithID:@"test4"];
+    
+    NSMutableDictionary* props = [[NSMutableDictionary alloc] init];
+    
+    [props setValue:@"something" forKey:@"name"];
+    
+    op = [doc putProperties: props];
+    [op onCompletion: ^{
+        if (op.isSuccessful)
+            NSLog(@"Successfully added document!");
+        else
+            NSLog(@"Failed to add document: %@", op.error);
+    }];
+    
+    CouchQuery* allDocs = database.getAllDocuments;
+    for (CouchQueryRow* row in allDocs.rows) {
+        CouchDocument* doc = row.document;
+        NSString* message = [doc.properties objectForKey: @"b"];
+        NSLog(@"Doc ID %@ has message: %@", row.documentID, message);
+    }
+    
+    [root useDatabase: database]; 
+   
+}
+
+-(void)couchbaseMobile:(CouchbaseMobile*)couchbase didStart:(NSURL*)serverURL {
+    NSLog(@"Couchbase is Ready, go! %@", serverURL);
+   
+    
+    [self connectToServer:serverURL];
+    return;
+    
+    
+    
+    
+}
+
+
+
+-(void)couchbaseMobile:(CouchbaseMobile*)couchbase failedToStart:(NSError*)error {
+    NSAssert(NO, @"Couchbase failed to initialize: %@", error);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

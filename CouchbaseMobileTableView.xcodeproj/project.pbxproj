@@ -13,13 +13,12 @@
 		F21BD4EC14269F8900BA612E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F21BD4EA14269F8900BA612E /* InfoPlist.strings */; };
 		F21BD4EE14269F8900BA612E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F21BD4ED14269F8900BA612E /* main.m */; };
 		F21BD4F214269F8900BA612E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F21BD4F114269F8900BA612E /* AppDelegate.m */; };
-		F21BD4F514269F8900BA612E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F21BD4F414269F8900BA612E /* RootViewController.m */; };
-		F21BD4F814269F8900BA612E /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F21BD4F714269F8900BA612E /* DataViewController.m */; };
-		F21BD4FB14269F8900BA612E /* ModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = F21BD4FA14269F8900BA612E /* ModelController.m */; };
-		F21BD4FE14269F8900BA612E /* RootViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21BD4FC14269F8900BA612E /* RootViewController_iPhone.xib */; };
-		F21BD50114269F8900BA612E /* RootViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21BD4FF14269F8900BA612E /* RootViewController_iPad.xib */; };
-		F21BD50414269F8900BA612E /* DataViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21BD50214269F8900BA612E /* DataViewController_iPhone.xib */; };
-		F21BD50714269F8900BA612E /* DataViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F21BD50514269F8900BA612E /* DataViewController_iPad.xib */; };
+		F21BD4F514269F8900BA612E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F21BD4F414269F8900BA612E /* ViewController.m */; };
+		F21BD50E14269FF000BA612E /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD50D14269FF000BA612E /* libstdc++.dylib */; };
+		F21BD5161426ABBB00BA612E /* Couchbase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD5141426ABBB00BA612E /* Couchbase.framework */; };
+		F21BD5171426ABBB00BA612E /* CouchCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD5151426ABBB00BA612E /* CouchCocoa.framework */; };
+		F2456C60142C507F00F3E26F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2456C5F142C507F00F3E26F /* ViewController.xib */; };
+		F2456C63142C60EC00F3E26F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2456C61142C5A7000F3E26F /* MainWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,22 +26,19 @@
 		F21BD4E114269F8900BA612E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F21BD4E314269F8900BA612E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F21BD4E514269F8900BA612E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		F21BD4E914269F8900BA612E /* CouchbaseMobileTableView-Info.plist */ = {isa = PBXFileReference; path = "CouchbaseMobileTableView-Info.plist"; sourceTree = "<group>"; };
+		F21BD4E914269F8900BA612E /* CouchbaseMobileTableView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CouchbaseMobileTableView-Info.plist"; sourceTree = "<group>"; };
 		F21BD4EB14269F8900BA612E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F21BD4ED14269F8900BA612E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F21BD4EF14269F8900BA612E /* CouchbaseMobileTableView-Prefix.pch */ = {isa = PBXFileReference; path = "CouchbaseMobileTableView-Prefix.pch"; sourceTree = "<group>"; };
-		F21BD4F014269F8900BA612E /* AppDelegate.h */ = {isa = PBXFileReference; path = AppDelegate.h; sourceTree = "<group>"; };
+		F21BD4EF14269F8900BA612E /* CouchbaseMobileTableView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CouchbaseMobileTableView-Prefix.pch"; sourceTree = "<group>"; };
+		F21BD4F014269F8900BA612E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F21BD4F114269F8900BA612E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F21BD4F314269F8900BA612E /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
-		F21BD4F414269F8900BA612E /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		F21BD4F614269F8900BA612E /* DataViewController.h */ = {isa = PBXFileReference; path = DataViewController.h; sourceTree = "<group>"; };
-		F21BD4F714269F8900BA612E /* DataViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
-		F21BD4F914269F8900BA612E /* ModelController.h */ = {isa = PBXFileReference; path = ModelController.h; sourceTree = "<group>"; };
-		F21BD4FA14269F8900BA612E /* ModelController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ModelController.m; sourceTree = "<group>"; };
-		F21BD4FD14269F8900BA612E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController_iPhone.xib; sourceTree = "<group>"; };
-		F21BD50014269F8900BA612E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController_iPad.xib; sourceTree = "<group>"; };
-		F21BD50314269F8900BA612E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DataViewController_iPhone.xib; sourceTree = "<group>"; };
-		F21BD50614269F8900BA612E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DataViewController_iPad.xib; sourceTree = "<group>"; };
+		F21BD4F314269F8900BA612E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F21BD4F414269F8900BA612E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F21BD50D14269FF000BA612E /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
+		F21BD5141426ABBB00BA612E /* Couchbase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Couchbase.framework; path = Frameworks/Couchbase.framework; sourceTree = "<group>"; };
+		F21BD5151426ABBB00BA612E /* CouchCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CouchCocoa.framework; path = Frameworks/CouchCocoa.framework; sourceTree = "<group>"; };
+		F2456C5F142C507F00F3E26F /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		F2456C61142C5A7000F3E26F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +46,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F21BD5161426ABBB00BA612E /* Couchbase.framework in Frameworks */,
+				F21BD5171426ABBB00BA612E /* CouchCocoa.framework in Frameworks */,
+				F21BD50E14269FF000BA612E /* libstdc++.dylib in Frameworks */,
 				F21BD4E214269F8900BA612E /* UIKit.framework in Frameworks */,
 				F21BD4E414269F8900BA612E /* Foundation.framework in Frameworks */,
 				F21BD4E614269F8900BA612E /* CoreGraphics.framework in Frameworks */,
@@ -79,6 +78,9 @@
 		F21BD4E014269F8900BA612E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F21BD5141426ABBB00BA612E /* Couchbase.framework */,
+				F21BD5151426ABBB00BA612E /* CouchCocoa.framework */,
+				F21BD50D14269FF000BA612E /* libstdc++.dylib */,
 				F21BD4E114269F8900BA612E /* UIKit.framework */,
 				F21BD4E314269F8900BA612E /* Foundation.framework */,
 				F21BD4E514269F8900BA612E /* CoreGraphics.framework */,
@@ -91,16 +93,10 @@
 			children = (
 				F21BD4F014269F8900BA612E /* AppDelegate.h */,
 				F21BD4F114269F8900BA612E /* AppDelegate.m */,
-				F21BD4F314269F8900BA612E /* RootViewController.h */,
-				F21BD4F414269F8900BA612E /* RootViewController.m */,
-				F21BD4F614269F8900BA612E /* DataViewController.h */,
-				F21BD4F714269F8900BA612E /* DataViewController.m */,
-				F21BD4F914269F8900BA612E /* ModelController.h */,
-				F21BD4FA14269F8900BA612E /* ModelController.m */,
-				F21BD4FC14269F8900BA612E /* RootViewController_iPhone.xib */,
-				F21BD4FF14269F8900BA612E /* RootViewController_iPad.xib */,
-				F21BD50214269F8900BA612E /* DataViewController_iPhone.xib */,
-				F21BD50514269F8900BA612E /* DataViewController_iPad.xib */,
+				F21BD4F314269F8900BA612E /* ViewController.h */,
+				F21BD4F414269F8900BA612E /* ViewController.m */,
+				F2456C5F142C507F00F3E26F /* ViewController.xib */,
+				F2456C61142C5A7000F3E26F /* MainWindow.xib */,
 				F21BD4E814269F8900BA612E /* Supporting Files */,
 			);
 			path = CouchbaseMobileTableView;
@@ -127,6 +123,7 @@
 				F21BD4D914269F8900BA612E /* Sources */,
 				F21BD4DA14269F8900BA612E /* Frameworks */,
 				F21BD4DB14269F8900BA612E /* Resources */,
+				F21BD5131426AA4000BA612E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -169,14 +166,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				F21BD4EC14269F8900BA612E /* InfoPlist.strings in Resources */,
-				F21BD4FE14269F8900BA612E /* RootViewController_iPhone.xib in Resources */,
-				F21BD50114269F8900BA612E /* RootViewController_iPad.xib in Resources */,
-				F21BD50414269F8900BA612E /* DataViewController_iPhone.xib in Resources */,
-				F21BD50714269F8900BA612E /* DataViewController_iPad.xib in Resources */,
+				F2456C60142C507F00F3E26F /* ViewController.xib in Resources */,
+				F2456C63142C60EC00F3E26F /* MainWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		F21BD5131426AA4000BA612E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "rsync -a \"${SRCROOT}/Frameworks/Couchbase.framework/CouchbaseResources\" \"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F21BD4D914269F8900BA612E /* Sources */ = {
@@ -185,9 +196,7 @@
 			files = (
 				F21BD4EE14269F8900BA612E /* main.m in Sources */,
 				F21BD4F214269F8900BA612E /* AppDelegate.m in Sources */,
-				F21BD4F514269F8900BA612E /* RootViewController.m in Sources */,
-				F21BD4F814269F8900BA612E /* DataViewController.m in Sources */,
-				F21BD4FB14269F8900BA612E /* ModelController.m in Sources */,
+				F21BD4F514269F8900BA612E /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,38 +211,6 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		F21BD4FC14269F8900BA612E /* RootViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F21BD4FD14269F8900BA612E /* en */,
-			);
-			name = RootViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		F21BD4FF14269F8900BA612E /* RootViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F21BD50014269F8900BA612E /* en */,
-			);
-			name = RootViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		F21BD50214269F8900BA612E /* DataViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F21BD50314269F8900BA612E /* en */,
-			);
-			name = DataViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		F21BD50514269F8900BA612E /* DataViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F21BD50614269F8900BA612E /* en */,
-			);
-			name = DataViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -242,6 +219,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Thompson (JQ94WXU6KS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -256,7 +234,8 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PROVISIONING_PROFILE = "E1CCA4CC-6DFE-4D8A-9B6F-AFB3B16C6E88";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -267,6 +246,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: David Thompson (JQ94WXU6KS)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -274,8 +254,9 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "E1CCA4CC-6DFE-4D8A-9B6F-AFB3B16C6E88";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -285,9 +266,15 @@
 		F21BD50B14269F8900BA612E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CouchbaseMobileTableView/CouchbaseMobileTableView-Prefix.pch";
 				INFOPLIST_FILE = "CouchbaseMobileTableView/CouchbaseMobileTableView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -296,9 +283,15 @@
 		F21BD50C14269F8900BA612E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CouchbaseMobileTableView/CouchbaseMobileTableView-Prefix.pch";
 				INFOPLIST_FILE = "CouchbaseMobileTableView/CouchbaseMobileTableView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -323,6 +316,7 @@
 				F21BD50C14269F8900BA612E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

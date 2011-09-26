@@ -7,9 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Couchbase/CouchbaseMobile.h>
+#import <CouchCocoa/CouchCocoa.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CouchbaseDelegate>
+{
+    CouchDatabase *database;
+    UINavigationController *navController;
+    UIWindow *window; 
+}
 
-@property (strong, nonatomic) UIWindow *window;
+@property(nonatomic, retain)CouchDatabase *database;
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) IBOutlet UINavigationController *navController;
 
 @end
