@@ -63,11 +63,11 @@
     }
     
     
-    CouchDocument *doc = [database documentWithID:@"test4"];
+   /* CouchDocument *doc = [database documentWithID:@"test6"];
     
     NSMutableDictionary* props = [[NSMutableDictionary alloc] init];
     
-    [props setValue:@"something" forKey:@"name"];
+    [props setValue:@"something6" forKey:@"name"];
     
     op = [doc putProperties: props];
     [op onCompletion: ^{
@@ -75,14 +75,40 @@
             NSLog(@"Successfully added document!");
         else
             NSLog(@"Failed to add document: %@", op.error);
-    }];
+    }];*/
+   /* 
+    NSString* dateString = [RESTBody JSONObjectWithDate: [NSDate date]];
+    
+    // Construct a unique document ID that will sort chronologically:
+    CFUUIDRef uuid = CFUUIDCreate(nil);
+    NSString *guid = (NSString*)CFUUIDCreateString(nil, uuid);
+    CFRelease(uuid);
+	NSString *docId = [NSString stringWithFormat:@"%@-%@", dateString, guid];
+    [guid release];
+    
+    // Create the new document's properties:
+	NSDictionary *inDocument = [NSDictionary dictionaryWithObjectsAndKeys:dateString, @"text",
+                                [NSNumber numberWithBool:NO], @"check",
+                                dateString, @"created_at",
+                                nil];
+    
+    // Save the document, asynchronously:
+    CouchDocument* doc2 = [database documentWithID: docId];
+    RESTOperation* op2 = [doc2 putProperties:inDocument];
+    [op2 onCompletion: ^{
+        if (op2.error)
+            NSLog(@"Failed to add document: %@", op.error);
+        // Re-run the query:
+	}];
+    [op2 start];
+    
     
     CouchQuery* allDocs = database.getAllDocuments;
     for (CouchQueryRow* row in allDocs.rows) {
         CouchDocument* doc = row.document;
         NSString* message = [doc.properties objectForKey: @"b"];
         NSLog(@"Doc ID %@ has message: %@", row.documentID, message);
-    }
+    }*/
     
     [root useDatabase: database]; 
    
