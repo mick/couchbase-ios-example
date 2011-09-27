@@ -24,20 +24,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    //self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    //ViewController *controller = [[[ViewController alloc] initWithNibName:@"ViewController" bundle:nil] autorelease];
     
     [window addSubview:navController.view];
-    
-    //self.window.rootViewController = controller;
     [window makeKeyAndVisible];
     
     CouchbaseMobile* cb = [[CouchbaseMobile alloc] init];
     cb.delegate = self;
     NSAssert([cb start], @"Couchbase didn't start! Error = %@", cb.error);
-    
-    
+        
     return YES;
 }
 
@@ -61,55 +55,7 @@
         // (a 412 status is OK; it just indicates the db already exists.)
         NSAssert(NO, @"CouchCocoa failed to connect.");
     }
-    
-    
-   /* CouchDocument *doc = [database documentWithID:@"test6"];
-    
-    NSMutableDictionary* props = [[NSMutableDictionary alloc] init];
-    
-    [props setValue:@"something6" forKey:@"name"];
-    
-    op = [doc putProperties: props];
-    [op onCompletion: ^{
-        if (op.isSuccessful)
-            NSLog(@"Successfully added document!");
-        else
-            NSLog(@"Failed to add document: %@", op.error);
-    }];*/
-   /* 
-    NSString* dateString = [RESTBody JSONObjectWithDate: [NSDate date]];
-    
-    // Construct a unique document ID that will sort chronologically:
-    CFUUIDRef uuid = CFUUIDCreate(nil);
-    NSString *guid = (NSString*)CFUUIDCreateString(nil, uuid);
-    CFRelease(uuid);
-	NSString *docId = [NSString stringWithFormat:@"%@-%@", dateString, guid];
-    [guid release];
-    
-    // Create the new document's properties:
-	NSDictionary *inDocument = [NSDictionary dictionaryWithObjectsAndKeys:dateString, @"text",
-                                [NSNumber numberWithBool:NO], @"check",
-                                dateString, @"created_at",
-                                nil];
-    
-    // Save the document, asynchronously:
-    CouchDocument* doc2 = [database documentWithID: docId];
-    RESTOperation* op2 = [doc2 putProperties:inDocument];
-    [op2 onCompletion: ^{
-        if (op2.error)
-            NSLog(@"Failed to add document: %@", op.error);
-        // Re-run the query:
-	}];
-    [op2 start];
-    
-    
-    CouchQuery* allDocs = database.getAllDocuments;
-    for (CouchQueryRow* row in allDocs.rows) {
-        CouchDocument* doc = row.document;
-        NSString* message = [doc.properties objectForKey: @"b"];
-        NSLog(@"Doc ID %@ has message: %@", row.documentID, message);
-    }*/
-    
+      
     [root useDatabase: database]; 
    
 }
@@ -117,13 +63,8 @@
 -(void)couchbaseMobile:(CouchbaseMobile*)couchbase didStart:(NSURL*)serverURL {
     NSLog(@"Couchbase is Ready, go! %@", serverURL);
    
-    
     [self connectToServer:serverURL];
     return;
-    
-    
-    
-    
 }
 
 
