@@ -18,8 +18,10 @@
 @interface ViewController ()
 @property(nonatomic, retain)CouchDatabase *database;
 @property(nonatomic, retain)NSURL* remoteSyncURL;
-
-
+- (void)showSyncStatus;
+- (void)hideSyncStatus;
+- (void)updateSyncURL;
+- (void)forgetSync;
 @end
 
 
@@ -46,6 +48,7 @@
 
 
 - (void)dealloc {
+    [self forgetSync];
     [database release];
     [super dealloc];
 }
@@ -64,6 +67,7 @@
     
 	[self.dataSource setQuery:query];
 	self.dataSource.labelProperty = @"text";	
+    [self updateSyncURL];
 }
 
 
@@ -139,6 +143,64 @@
     NSString* message = op.isDELETE ? @"Couldn't delete item" : @"Operation failed";
     [self showErrorAlert: message forOperation: op];
 }
+#pragma mark - SYNC:
 
+- (void) forgetSync {
+    [_pull removeObserver: self forKeyPath: @"completed"];
+    [_pull release];
+    _pull = nil;
+    [_push removeObserver: self forKeyPath: @"completed"];
+    [_push release];
+    _push = nil;
+}
+
+- (void)updateSyncURL {
+    if (!self.database)
+        return;
+    remoteSyncURL = [NSURL URLWithString: @"http://dmt.iriscouch.com/couchbasedemo"];
+    
+    [self forgetSync];
+    NSLog(@" replications: %d", [[self.database replications] count]);
+    NSArray* repls = [self.database replicateWithURL: remoteSyncURL exclusively: YES];
+    _pull = [[repls objectAtIndex: 0] retain];
+    _push = [[repls objectAtIndex: 1] retain];
+    [_pull addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
+    [_push addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
+}
+
+- (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object 
+                         change:(NSDictionary *)change context:(void *)context
+{
+    if (object == _pull || object == _push) {
+        unsigned completed = _pull.completed + _push.completed;
+        unsigned total = _pull.total + _push.total;
+        NSLog(@"SYNC progress: %u / %u", completed, total);
+        if (total > 0 && completed < total) {
+            [self showSyncStatus];
+            [progress setProgress:(completed / (float)total)];
+            database.server.activityPollInterval = 0.5;   // poll often while progress is showing
+        } else {
+            [self hideSyncStatus];
+            database.server.activityPollInterval = 2.0;   // poll less often at other times
+        }
+    }
+}
+
+- (void)hideSyncStatus {
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+
+- (void)showSyncStatus {
+    if (!progress) {
+        progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        CGRect frame = progress.frame;
+        frame.size.width = self.view.frame.size.width / 4.0;
+        progress.frame = frame;
+    }
+    UIBarButtonItem* progressItem = [[UIBarButtonItem alloc] initWithCustomView:progress];
+    progressItem.enabled = NO;
+    self.navigationItem.rightBarButtonItem = [progressItem autorelease];
+}
 
 @end

@@ -57,6 +57,10 @@
     }
       
     [root useDatabase: database]; 
+    
+    database.tracksChanges = YES;
+    database.tracksActiveOperations = YES;
+
    
 }
 
