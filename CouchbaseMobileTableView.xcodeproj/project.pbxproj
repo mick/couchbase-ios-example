@@ -17,7 +17,6 @@
 		F21BD50E14269FF000BA612E /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD50D14269FF000BA612E /* libstdc++.dylib */; };
 		F21BD5161426ABBB00BA612E /* Couchbase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD5141426ABBB00BA612E /* Couchbase.framework */; };
 		F21BD5171426ABBB00BA612E /* CouchCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD5151426ABBB00BA612E /* CouchCocoa.framework */; };
-		F2456C60142C507F00F3E26F /* ViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2456C5F142C507F00F3E26F /* ViewController2.xib */; };
 		F2456C63142C60EC00F3E26F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2456C61142C5A7000F3E26F /* MainWindow.xib */; };
 		F2F77A88143122B200908B2B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2F77A87143122B100908B2B /* ViewController.xib */; };
 /* End PBXBuildFile section */
@@ -38,7 +37,6 @@
 		F21BD50D14269FF000BA612E /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		F21BD5141426ABBB00BA612E /* Couchbase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Couchbase.framework; path = Frameworks/Couchbase.framework; sourceTree = "<group>"; };
 		F21BD5151426ABBB00BA612E /* CouchCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CouchCocoa.framework; path = Frameworks/CouchCocoa.framework; sourceTree = "<group>"; };
-		F2456C5F142C507F00F3E26F /* ViewController2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController2.xib; sourceTree = "<group>"; };
 		F2456C61142C5A7000F3E26F /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		F2F77A87143122B100908B2B /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -98,7 +96,6 @@
 				F21BD4F314269F8900BA612E /* ViewController.h */,
 				F21BD4F414269F8900BA612E /* ViewController.m */,
 				F2F77A87143122B100908B2B /* ViewController.xib */,
-				F2456C5F142C507F00F3E26F /* ViewController2.xib */,
 				F2456C61142C5A7000F3E26F /* MainWindow.xib */,
 				F21BD4E814269F8900BA612E /* Supporting Files */,
 			);
@@ -169,7 +166,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F21BD4EC14269F8900BA612E /* InfoPlist.strings in Resources */,
-				F2456C60142C507F00F3E26F /* ViewController2.xib in Resources */,
 				F2456C63142C60EC00F3E26F /* MainWindow.xib in Resources */,
 				F2F77A88143122B200908B2B /* ViewController.xib in Resources */,
 			);
