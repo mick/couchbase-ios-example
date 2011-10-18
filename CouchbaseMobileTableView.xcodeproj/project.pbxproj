@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		274EB8BF1448E1FE001B7DD0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 274EB8BE1448E1FE001B7DD0 /* libz.dylib */; };
+		274EB8C21448E20D001B7DD0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274EB8C11448E20D001B7DD0 /* Security.framework */; };
 		F21BD4E214269F8900BA612E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD4E114269F8900BA612E /* UIKit.framework */; };
 		F21BD4E414269F8900BA612E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD4E314269F8900BA612E /* Foundation.framework */; };
 		F21BD4E614269F8900BA612E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F21BD4E514269F8900BA612E /* CoreGraphics.framework */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		274EB8BE1448E1FE001B7DD0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		274EB8C11448E20D001B7DD0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F21BD4DD14269F8900BA612E /* CouchbaseMobileTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CouchbaseMobileTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21BD4E114269F8900BA612E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F21BD4E314269F8900BA612E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -46,6 +50,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274EB8C21448E20D001B7DD0 /* Security.framework in Frameworks */,
+				274EB8BF1448E1FE001B7DD0 /* libz.dylib in Frameworks */,
 				F21BD5161426ABBB00BA612E /* Couchbase.framework in Frameworks */,
 				F21BD5171426ABBB00BA612E /* CouchCocoa.framework in Frameworks */,
 				F21BD50E14269FF000BA612E /* libstdc++.dylib in Frameworks */,
@@ -84,6 +90,8 @@
 				F21BD4E114269F8900BA612E /* UIKit.framework */,
 				F21BD4E314269F8900BA612E /* Foundation.framework */,
 				F21BD4E514269F8900BA612E /* CoreGraphics.framework */,
+				274EB8C11448E20D001B7DD0 /* Security.framework */,
+				274EB8BE1448E1FE001B7DD0 /* libz.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

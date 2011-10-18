@@ -7,31 +7,34 @@
 //
 
 #import "ViewController.h"
-//#import "ConfigViewController.h"
-#import "AppDelegate.h"
-
 #import <CouchCocoa/CouchCocoa.h>
-#import <CouchCocoa/RESTBody.h>
 #import <Couchbase/CouchbaseMobile.h>
+
+
+// Remote database to sync with:
+#define kRemoteSyncURLStr @"http://dmt.iriscouch.com/couchbasedemo"
 
 
 @interface ViewController ()
 @property(nonatomic, retain)CouchDatabase *database;
-@property(nonatomic, retain)NSURL* remoteSyncURL;
+- (void)startSync;
 - (void)showSyncStatus;
 - (void)hideSyncStatus;
-- (void)updateSyncURL;
-- (void)forgetSync;
 @end
 
 
 @implementation ViewController
+{
+    CouchPersistentReplication* pull_;
+    CouchPersistentReplication* push_;
+    UIProgressView *progress_;
+}
 
 
-@synthesize dataSource;
-@synthesize database;
-@synthesize tableView;
-@synthesize remoteSyncURL;
+@synthesize dataSource = dataSource_;
+@synthesize database = database_;
+@synthesize tableView = tableView_;
+@synthesize addItemTextField = addItemTextField_;
 
 
 #pragma mark - View lifecycle
@@ -41,15 +44,16 @@
     [super viewDidLoad];
     
     [CouchUITableSource class];     // Prevents class from being dead-stripped by linker
-    
-    [self.tableView setBackgroundView:nil];
-    [self.tableView setBackgroundColor:[UIColor clearColor]];   
 }
 
 
 - (void)dealloc {
-    [self forgetSync];
-    [database release];
+    [pull_ release];
+    [push_ release];
+    [database_ release];
+    [tableView_ release];
+    [dataSource_ release];
+    [addItemTextField_ release];
     [super dealloc];
 }
 
@@ -61,13 +65,19 @@
 
 - (void)useDatabase:(CouchDatabase*)theDatabase {
     self.database = theDatabase;
-      
-    CouchLiveQuery* query = [[database getAllDocuments] asLiveQuery];
+    
+    // Create a view function that will return docs by descending 'created_at':
+    CouchDesignDocument* design = [theDatabase designDocumentWithName: @"grocery"];
+    [design defineViewNamed: @"byDate"
+                        map: @"function(doc) {if (doc.created_at) emit(doc.created_at, doc);}"];
+    CouchLiveQuery* query = [[design queryViewNamed: @"byDate"] asLiveQuery];
     query.descending = YES;
     
-	[self.dataSource setQuery:query];
-	self.dataSource.labelProperty = @"text";	
-    [self updateSyncURL];
+    // Start the query the table view will run:
+	self.dataSource.query = query;
+	self.dataSource.labelProperty = @"text";
+    
+    [self startSync];
 }
 
 
@@ -80,14 +90,14 @@
 
 #pragma mark - Table view delegate
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // delegate method when cell are selected.
-
+    // delegate method when row is selected.
 }
 
 
@@ -100,31 +110,22 @@
 	return YES;
 }
 
+
 -(void)textFieldDidEndEditing:(UITextField *)textField {
     // Get the name of the item from the text field:
-	NSString *text = addItemTextField.text;
+	NSString *text = addItemTextField_.text;
     if (text.length == 0) {
         return;
     }
-    [addItemTextField setText:nil];
-    
-    // Get the current date+time as a string in standard JSON format:
-    NSString* dateString = [RESTBody JSONObjectWithDate: [NSDate date]];
-    
-    // Construct a unique document ID that will sort chronologically:
-    CFUUIDRef uuid = CFUUIDCreate(nil);
-    NSString *guid = (NSString*)CFUUIDCreateString(nil, uuid);
-    CFRelease(uuid);
-	NSString *docId = [NSString stringWithFormat:@"%@-%@", dateString, guid];
-    [guid release];
+    [addItemTextField_ setText:nil];
     
     // Create the new document's properties:
 	NSDictionary *inDocument = [NSDictionary dictionaryWithObjectsAndKeys:text, @"text",
-                                dateString, @"created_at",
+                                [RESTBody JSONObjectWithDate: [NSDate date]], @"created_at",
                                 nil];
     
     // Save the document, asynchronously:
-    CouchDocument* doc = [database documentWithID: docId];
+    CouchDocument* doc = [database_ untitledDocument];
     RESTOperation* op = [doc putProperties:inDocument];
     [op onCompletion: ^{
         if (op.error)
@@ -136,71 +137,66 @@
 }
 
 
-
 - (void)couchTableSource:(CouchUITableSource*)source
          operationFailed:(RESTOperation*)op
 {
     NSString* message = op.isDELETE ? @"Couldn't delete item" : @"Operation failed";
     [self showErrorAlert: message forOperation: op];
 }
-#pragma mark - SYNC:
 
-- (void) forgetSync {
-    [_pull removeObserver: self forKeyPath: @"completed"];
-    [_pull release];
-    _pull = nil;
-    [_push removeObserver: self forKeyPath: @"completed"];
-    [_push release];
-    _push = nil;
-}
 
-- (void)updateSyncURL {
-    if (!self.database)
-        return;
-    remoteSyncURL = [NSURL URLWithString: @"http://dmt.iriscouch.com/couchbasedemo"];
-    
-    [self forgetSync];
-    NSLog(@" replications: %d", [[self.database replications] count]);
+#pragma mark - Sync:
+
+
+- (void)startSync {
+    NSURL* remoteSyncURL = [NSURL URLWithString: kRemoteSyncURLStr];
     NSArray* repls = [self.database replicateWithURL: remoteSyncURL exclusively: YES];
-    _pull = [[repls objectAtIndex: 0] retain];
-    _push = [[repls objectAtIndex: 1] retain];
-    [_pull addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
-    [_push addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
+    pull_ = [[repls objectAtIndex: 0] retain];
+    push_ = [[repls objectAtIndex: 1] retain];
+    [pull_ addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
+    [push_ addObserver: self forKeyPath: @"completed" options: 0 context: NULL];
 }
+
 
 - (void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object 
                          change:(NSDictionary *)change context:(void *)context
 {
-    if (object == _pull || object == _push) {
-        unsigned completed = _pull.completed + _push.completed;
-        unsigned total = _pull.total + _push.total;
+    if (object == pull_ || object == push_) {
+        unsigned completed = pull_.completed + push_.completed;
+        unsigned total = pull_.total + push_.total;
         NSLog(@"SYNC progress: %u / %u", completed, total);
         if (total > 0 && completed < total) {
             [self showSyncStatus];
-            [progress setProgress:(completed / (float)total)];
-            database.server.activityPollInterval = 0.5;   // poll often while progress is showing
+            [progress_ setProgress:(completed / (float)total)];
+            database_.server.activityPollInterval = 0.5;   // poll often while progress is showing
         } else {
             [self hideSyncStatus];
-            database.server.activityPollInterval = 2.0;   // poll less often at other times
+            database_.server.activityPollInterval = 2.0;   // poll less often at other times
         }
     }
 }
 
+
 - (void)hideSyncStatus {
-    self.navigationItem.rightBarButtonItem = nil;
+    if (progress_) {
+        self.navigationItem.rightBarButtonItem = nil;
+        [progress_ release];
+        progress_ = nil;
+    }
 }
 
 
 - (void)showSyncStatus {
-    if (!progress) {
-        progress = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-        CGRect frame = progress.frame;
+    if (!progress_) {
+        progress_ = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        CGRect frame = progress_.frame;
         frame.size.width = self.view.frame.size.width / 4.0;
-        progress.frame = frame;
+        progress_.frame = frame;
+
+        UIBarButtonItem* progressItem = [[UIBarButtonItem alloc] initWithCustomView:progress_];
+        progressItem.enabled = NO;
+        self.navigationItem.rightBarButtonItem = [progressItem autorelease];
     }
-    UIBarButtonItem* progressItem = [[UIBarButtonItem alloc] initWithCustomView:progress];
-    progressItem.enabled = NO;
-    self.navigationItem.rightBarButtonItem = [progressItem autorelease];
 }
 
 @end

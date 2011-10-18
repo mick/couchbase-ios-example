@@ -9,25 +9,14 @@
 
 #import <UIKit/UIKit.h>
 #import <CouchCocoa/CouchUITableSource.h>
-@class CouchDatabase, CouchPersistentReplication;
+@class CouchDatabase;
 
 
 @interface ViewController : UIViewController <CouchUITableDelegate, UITextFieldDelegate>
-{
-    CouchDatabase *database;
-    NSURL* remoteSyncURL;
-    CouchPersistentReplication* _pull;
-    CouchPersistentReplication* _push;
-    
-    UITableView *tableView;
-    IBOutlet UITextField *addItemTextField;
-    IBOutlet UIProgressView *progress;
-    BOOL showingSyncButton;
-
-}
 
 @property(nonatomic, retain) IBOutlet UITableView *tableView;
 @property(nonatomic, retain) IBOutlet CouchUITableSource *dataSource;
+@property(nonatomic, retain) IBOutlet UITextField *addItemTextField;
 
 -(void)useDatabase:(CouchDatabase*)theDatabase;
 
